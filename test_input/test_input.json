@@ -1,0 +1,11 @@
+{
+
+    "email": "miquelsanchezosuna@gmail.com",
+    "api_key": "006c1ab893fefe53d79c7b438fb5712b2709",
+    "cog_file":"dinB_Bacteroidetes_ids.txt",
+    "nr_identity": 75,
+    "meme_minsize": 12,
+    "meme_maxsize": 26,
+    "out_file":"/home/miquel/PhylogeneticTree_MotifMapping.svg"
+
+}
