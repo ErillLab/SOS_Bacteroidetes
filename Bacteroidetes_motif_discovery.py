@@ -18,47 +18,6 @@ from Bio.SeqRecord import SeqRecord
 from io import StringIO
 
 
-def blast_search(query, database, cutoff, nhits, coverage):
-    
-    """ Local BLASTp search to detect orthologues.
-        Receives a query protein accession, an e-value cut off a coverage cut off
-        and the maximum number of hits to be retrieved.
-
-        Returns a list containing the protein accessions for the BLASTP hits.
-    """
-    #save query protein accession into FASTA file needed for BLAST search
-    out_handle = open("validatedTF_query.fasta", "w")
-    handle = Entrez.efetch(db="protein", id=query, rettype="fasta", retmode="text")
-    out_handle.write(handle.read())
-    out_handle.close()
-    handle.close()
-    
-    #blastp against local database
-    blastp_cline = NcbiblastpCommandline(query="validatedTF_query.fasta", db=database,\
-                                        evalue=cutoff, outfmt='"6 std qcovs"',\
-                                        num_alignments = nhits)
-    stdout, sterr = blastp_cline()
-    
-    blast_records = SearchIO.parse(StringIO(stdout),"blast-tab",\
-                                   fields=['std','qcovs'])
-        
-    #return the hits passing retrieved thresholds
-    validated_TF = []
-    for blast_record in blast_records:
-        for alignment in blast_record:
-            if alignment.query_coverage >= coverage: 
-                if "P_" in str(alignment.id_all):                
-                    acc = "_".join(str(alignment.id_all).split("_prot_")[-1].split("_")[0:2])
-                else:
-                    acc = str(alignment.id_all).split("_prot_")[-1].split("_")[0]
-                validated_TF.append(acc)
-    
-    #remove the query FASTA file
-    os.remove("validatedTF_query.fasta")   
-    
-    return validated_TF
-
-
 def split_accession(acc):
     
     """ Splits a genbank/refseq record into prefix (e.g. NZ_MDWE or MDWE) and
