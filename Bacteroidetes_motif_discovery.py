@@ -13,7 +13,6 @@ import os
 import subprocess
 import time
 from Bio import  Entrez, pairwise2, Seq, SearchIO
-from Bio.Blast.Applications import NcbiblastpCommandline
 from Bio.SeqRecord import SeqRecord
 from io import StringIO
 
