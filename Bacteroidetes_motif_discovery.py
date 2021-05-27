@@ -2,7 +2,6 @@
 
 # @author: miquelsanchezosuna
 
-### new promoter_retrieval not including regions with previous CDS
 ### MEME needs to be installed locally
 ### Implemented for Python3
 
