@@ -282,7 +282,7 @@ with open("test_input.json") as json_conf :
 Entrez.email = conf["email"]
 Entrez.api_key = conf["api_key"]
 
-#Open a file containing ids matching a desired COG of save them into a list
+#Open a file containing desired protein ids
 filename = conf["cog_file"]
 with open(filename) as f:
     query_ids = f.readlines()
