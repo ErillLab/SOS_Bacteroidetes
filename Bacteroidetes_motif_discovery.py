@@ -157,7 +157,7 @@ def promoter_retrieval(nucid,start,stop,strand,start_adj=250,stop_adj=2, min_siz
     handle = None
     while handle == None:
         try: 
-            handle = Entrez.efetch(db="nuccore",id=nucid, strand=s_strand,seq_start=s_start, seq_stop=s_stop, rettype='gbwithparts', retmode="XML")
+            handle = Entrez.efetch(db="nuccore",id=nucid, strand=s_strand,seq_start=s_start, seq_stop=s_stop, rettype='gb', retmode="xml")
             genome_record = Entrez.read(handle, "xml")
         except:
             time.sleep(5)
